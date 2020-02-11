@@ -15,6 +15,11 @@
             msg: 'ZFS dataset {{ item.name }} consumes {{ item.used }} of disk space.'
           with_items: '{{ ansible_zfs_datasets }}'
 
+        - name: Ensure that zed is up and running
+          service: 
+            name: zed
+            state: started
+
         - name: Set mount point and home directory quota for Lucio
           zfs:
             name: volume0/home/lucio
