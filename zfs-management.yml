@@ -1,0 +1,49 @@
+---
+    - hosts: all
+      gather_facts: no
+      tasks:
+        - name: Get some facts about my ZFS dataset
+          zfs_facts: 
+            dataset: volume0
+        - name: Report space usage on ZFS filesystems
+          zfs_facts:
+            name: volume0
+            recurse: yes
+            type: filesystem
+
+        - debug:
+            msg: 'ZFS dataset {{ item.name }} consumes {{ item.used }} of disk space.'
+          with_items: '{{ ansible_zfs_datasets }}'
+
+        - name: Set mount point and home directory quota for Lucio
+          zfs:
+            name: volume0/home/lucio
+            state: present
+            extra_zfs_properties:
+                    mountpoint: /srv/data/lucio
+                    refquota: 2G
+
+        - name: Enable ZFS compression
+          zfs:
+            name: volume0/home/lucio
+            state: present
+            extra_zfs_properties:
+                    compression: on 
+
+        - name: Ensure that setuid is honored
+          zfs:
+            name: volume0/home/mercy
+            state: present
+            extra_zfs_properties:
+              setuid: on
+
+        - name: Make snapshots directory visible
+          zfs:
+            name: volume0/home/mercy
+            state: present
+            extra_zfs_properties:
+              snapdir: visible
+
+
+
+
