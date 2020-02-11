@@ -2,7 +2,8 @@
 The playbook in this repository will walk you through managing ZFS on `localhost`. 
 
 ## Preparation
-You may wish to run this on a disposable ZFS file system. ZFS supports using a file as a ZFS file system. The documentation suggests using `mkfile` but this is not available by default on Ubuntu these days. We have `dd` to the rescue! 
+You may wish to run this on a disposable ZFS file system. ZFS supports using a file as a ZFS file system. The documentation suggests using `mkfile` but this is not available by default on Ubuntu these days. We have `dd` to the rescue!
+The provided `hosts` file is to support using Ansible on localhost. 
 
 ### Set up a disposable ZFS file system
 ```
@@ -63,3 +64,16 @@ volume0/home/lucio     864M     0  864M   0% /srv/data/lucio
 ```
 
 Done! That ZFS volume is now mounted at `/srv/data/lucio`.
+
+## Put it all together
+```
+ANSIBLE_NOCOWS=1 v/bin/ansible-playbook  -i hosts zfs-management.yml
+```
+
+While cows are fun, your terminal can get crowded. I use `ANSIBLE_NOCOWS=1` to make the cows go away. 
+
+## Resources
+### Ansible Modules
+[zfs](https://docs.ansible.com/ansible/latest/modules/zfs_module.html)
+[zfs_facts](https://docs.ansible.com/ansible/latest/modules/zfs_facts_module.html)
+[zpool_facts](https://docs.ansible.com/ansible/latest/modules/zpool_facts_module.html)
