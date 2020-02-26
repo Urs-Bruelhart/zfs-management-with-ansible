@@ -75,5 +75,8 @@ While cows are fun, your terminal can get crowded. I use `ANSIBLE_NOCOWS=1` to m
 ## Resources
 ### Ansible Modules
 [zfs](https://docs.ansible.com/ansible/latest/modules/zfs_module.html)
+
 [zfs_facts](https://docs.ansible.com/ansible/latest/modules/zfs_facts_module.html)
+
 [zpool_facts](https://docs.ansible.com/ansible/latest/modules/zpool_facts_module.html)
+
