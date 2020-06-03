@@ -17,6 +17,9 @@ NAME      USED  AVAIL  REFER  MOUNTPOINT
 volume0  85.5K   864M    24K  /volume0
 ```
 
+[![asciicast](https://asciinema.org/a/336260.svg)](https://asciinema.org/a/336260)
+
+
 ## Ansible + ZFS
 I assembled `zfs-management.yml` to test performing different ZFS management tasks. This makes creating volumes, setting quotas and mountpoints and managing other ZFS properties *super* easy. 
 ### Learn about the ZFS volume
